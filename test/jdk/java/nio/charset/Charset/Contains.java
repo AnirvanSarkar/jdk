@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2010, 2022, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -23,12 +23,11 @@
 
 /* @test
  * @summary Unit test for charset containment
- * @bug 6798572
+ * @bug 6798572 8167252
  * @modules jdk.charsets
  */
 
 import java.nio.charset.*;
-
 
 public class Contains {
 
@@ -93,6 +92,8 @@ public class Contains {
         ck(cp1252, cp1252, true);
 
         checkUTF();
+
+        checkSelf();
     }
 
     static void checkUTF() throws Exception {
@@ -101,6 +102,12 @@ public class Contains {
                 ck(Charset.forName(utfName),
                    Charset.forName(csName),
                    true);
+    }
+
+    static void checkSelf() throws Exception {
+        for (Charset charset : Charset.availableCharsets().values()) {
+            ck(charset, charset, true);
+        }
     }
 
     static String[] utfNames = {"utf-16",
