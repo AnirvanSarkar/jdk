@@ -93,7 +93,7 @@ public class Contains {
 
         checkUTF();
 
-        checkSelf();
+        checkAvailableCharsets();
     }
 
     static void checkUTF() throws Exception {
@@ -108,6 +108,22 @@ public class Contains {
         for (Charset charset : Charset.availableCharsets().values()) {
             ck(charset, charset, true);
         }
+    }
+
+    static void checkAvailableCharsets() throws Exception {
+        boolean failed = false;
+
+		for (Charset charset : Charset.availableCharsets().values()) {
+			boolean contains = charset.contains(charset);
+			if (!contains) {
+				System.err.println(charset.getClass() + " does not contains itself");
+				failed = true;
+			}
+		}
+
+		if (failed) {
+			throw new Exception("Charset.contains(itself) returns false for some charsets");
+		}
     }
 
     static String[] utfNames = {"utf-16",
