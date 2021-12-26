@@ -42,6 +42,7 @@ tier1_part3 = \
     :jdk_svc_sanity \
     :jdk_foreign \
     java/nio/Buffer \
+    java/nio/charset/Charset/Contains.java \
     com/sun/crypto/provider/Cipher \
     sun/nio/cs/ISO8859x.java
 
@@ -62,6 +63,7 @@ tier2_part2 = \
     :jdk_io \
     :jdk_nio \
     -java/nio/Buffer \
+    -java/nio/charset/Charset/Contains.java \
     -sun/nio/cs/ISO8859x.java \
     :jdk_other \
     :jdk_text \
